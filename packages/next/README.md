@@ -3,10 +3,28 @@
 Next.js adapter. Two entry points: global `Response` patcher (via `instrumentation.ts`) and a middleware helper.
 
 ```bash
-npm install @redactenv/next @redactenv/core
+npm install @redactenv/next @redactenv/patterns
 ```
 
-## Option 1: instrumentation hook (recommended)
+## Zero-config (recommended)
+
+Create `instrumentation.ts` at the project root:
+
+```ts
+export async function register() {
+  if (process.env.NEXT_RUNTIME === 'nodejs') {
+    await import('@redactenv/next/auto');
+  }
+}
+```
+
+That's it. Boot log shows what's protected. Default profile = env snapshot (with sensible allowlist that skips `NODE_ENV`, `PORT`, `NEXT_PUBLIC_*`, `VERCEL_*`, `AWS_REGION`, …) + every `confidence: 'high'` pattern.
+
+Need overrides? Use Option 1 below.
+
+---
+
+## Option 1: instrumentation hook with custom config
 
 Patches the global `Response` constructor at boot. Every `Response` and `Response.json()` returned from a route handler or page is scanned.
 

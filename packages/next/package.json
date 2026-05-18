@@ -13,6 +13,10 @@
     "./middleware": {
       "types": "./dist/middleware.d.ts",
       "import": "./dist/middleware.js"
+    },
+    "./auto": {
+      "types": "./dist/auto.d.ts",
+      "import": "./dist/auto.js"
     }
   },
   "files": ["dist", "src"],
@@ -21,7 +25,8 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@redactenv/core": "0.1.0"
+    "@redactenv/core": "0.1.0",
+    "@redactenv/patterns": "0.1.0"
   },
   "peerDependencies": {
     "next": ">=13"

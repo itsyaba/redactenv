@@ -3,10 +3,30 @@
 Express / Connect middleware. Wraps `res.send`, `res.json`, `res.end`, `res.setHeader`. Plus error handler that scrubs stack traces.
 
 ```bash
-npm install @redactenv/express @redactenv/core
+npm install @redactenv/express @redactenv/patterns
 ```
 
-## Usage
+## Zero-config (recommended)
+
+```ts
+import express from 'express';
+import { middleware, errorHandler } from '@redactenv/express/auto';
+
+const app = express();
+app.use(middleware);
+
+// ... your routes ...
+
+app.use(errorHandler);
+```
+
+Boot log shows what's covered. Default profile = env snapshot (with allowlist skipping `NODE_ENV`, `PORT`, `LOG_LEVEL`, etc.) + every `confidence: 'high'` pattern from `@redactenv/patterns`.
+
+Need overrides? Use the explicit form below.
+
+---
+
+## Explicit config
 
 ```ts
 import express from 'express';

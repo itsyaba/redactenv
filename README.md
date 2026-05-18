@@ -10,8 +10,43 @@ Drop it into Express, Next.js, or your logging pipeline. It scrubs API keys, JWT
 
 ---
 
+## 30-second install
+
+**Next.js** — create `instrumentation.ts` at the project root:
+
+```ts
+export async function register() {
+  if (process.env.NEXT_RUNTIME === 'nodejs') {
+    await import('@redactenv/next/auto');
+  }
+}
+```
+
+**Express** — one line:
+
+```ts
+import { middleware, errorHandler } from '@redactenv/express/auto';
+
+app.use(middleware);
+// ... routes ...
+app.use(errorHandler);
+```
+
+Zero config. Boot log prints what's covered:
+
+```
+redactenv: monitoring 23 env values + 11 patterns
+```
+
+Outputs are scrubbed of every long `process.env` value (with sensible defaults that don't redact `NODE_ENV=production`) and every match for high-confidence patterns (AWS, Stripe, GitHub, OpenAI, Anthropic, Google, Slack, JWT, private keys).
+
+Need more control? Skip to [Config reference](#config-reference).
+
+---
+
 ## Contents
 
+- [30-second install](#30-second-install)
 - [Packages](#packages)
 - [Install](#install)
 - [Quick start — Express](#quick-start--express)

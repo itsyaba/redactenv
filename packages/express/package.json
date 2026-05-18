@@ -9,6 +9,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./auto": {
+      "types": "./dist/auto.d.ts",
+      "import": "./dist/auto.js"
     }
   },
   "files": ["dist", "src"],
@@ -17,7 +21,8 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@redactenv/core": "0.1.0"
+    "@redactenv/core": "0.1.0",
+    "@redactenv/patterns": "0.1.0"
   },
   "peerDependencies": {
     "express": ">=4"

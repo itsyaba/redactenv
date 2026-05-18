@@ -80,3 +80,9 @@ export const highConfidencePatterns: PatternRule[] = Object.values(patterns).fil
 );
 
 export const allPatterns: PatternRule[] = Object.values(patterns);
+
+export {
+  createDefaultRedactor,
+  type DefaultRedactorOverrides,
+  type DefaultRedactorResult,
+} from './defaults.js';

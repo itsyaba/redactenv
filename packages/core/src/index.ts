@@ -13,3 +13,4 @@ export type {
 } from './types.js';
 export { captureEnv } from './env-snapshot.js';
 export { shortHash } from './hash.js';
+export { DEFAULT_ALLOW_ENV_KEYS, DEFAULT_MIN_SECRET_LENGTH } from './defaults.js';
