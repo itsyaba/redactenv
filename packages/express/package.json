@@ -1,0 +1,29 @@
+{
+  "name": "@redactenv/express",
+  "version": "0.1.0",
+  "description": "Express/Connect middleware that redacts secrets from outgoing responses",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "src"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@redactenv/core": "0.1.0"
+  },
+  "peerDependencies": {
+    "express": ">=4"
+  },
+  "peerDependenciesMeta": {
+    "express": { "optional": true }
+  },
+  "license": "MIT"
+}

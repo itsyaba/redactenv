@@ -1,0 +1,19 @@
+{
+  "name": "example-express-app",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --experimental-strip-types src/server.ts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@redactenv/core": "0.1.0",
+    "@redactenv/express": "0.1.0",
+    "@redactenv/patterns": "0.1.0",
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0"
+  }
+}

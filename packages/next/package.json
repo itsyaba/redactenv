@@ -1,0 +1,33 @@
+{
+  "name": "@redactenv/next",
+  "version": "0.1.0",
+  "description": "Next.js adapter for redactenv: instrumentation hook + Response wrapper + error scrubbing",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./middleware": {
+      "types": "./dist/middleware.d.ts",
+      "import": "./dist/middleware.js"
+    }
+  },
+  "files": ["dist", "src"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@redactenv/core": "0.1.0"
+  },
+  "peerDependencies": {
+    "next": ">=13"
+  },
+  "peerDependenciesMeta": {
+    "next": { "optional": true }
+  },
+  "license": "MIT"
+}
