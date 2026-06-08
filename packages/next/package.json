@@ -34,5 +34,15 @@
   "peerDependenciesMeta": {
     "next": { "optional": true }
   },
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsyaba/redactenv.git",
+    "directory": "packages/next"
+  },
+  "bugs": "https://github.com/itsyaba/redactenv/issues",
+  "homepage": "https://github.com/itsyaba/redactenv#readme",
+  "publishConfig": {
+    "access": "public"
+  }
 }

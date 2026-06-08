@@ -17,5 +17,15 @@
     "test": "vitest run"
   },
   "keywords": ["security", "redact", "secrets", "api-keys", "leak"],
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsyaba/redactenv.git",
+    "directory": "packages/core"
+  },
+  "bugs": "https://github.com/itsyaba/redactenv/issues",
+  "homepage": "https://github.com/itsyaba/redactenv#readme",
+  "publishConfig": {
+    "access": "public"
+  }
 }
