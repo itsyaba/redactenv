@@ -1,6 +1,7 @@
-import type { RedactorConfig, Redactor } from './types.js';
+import type { RedactorConfig, Redactor, Action } from './types.js';
 import { compileRules, findMatches } from './detector.js';
 import { shortHash } from './hash.js';
+import { maskValue } from './mask.js';
 import { walkAndTransform } from './walk.js';
 
 export function createRedactor(config: RedactorConfig): Redactor {
@@ -12,9 +13,17 @@ export function createRedactor(config: RedactorConfig): Redactor {
   });
   const placeholder = config.placeholder ?? '[REDACTED]';
   const hashOpts = config.hash ?? {};
+  const maskOpts = config.mask ?? {};
 
-  function applyAction(value: string, action: 'redact' | 'hash'): string {
-    return action === 'hash' ? shortHash(value, hashOpts) : placeholder;
+  function applyAction(value: string, action: Action): string {
+    switch (action) {
+      case 'hash':
+        return shortHash(value, hashOpts);
+      case 'mask':
+        return maskValue(value, maskOpts);
+      default:
+        return placeholder;
+    }
   }
 
   function scanString(input: string): string {

@@ -33,6 +33,24 @@ describe('createRedactor', () => {
     expect(out).toMatch(/^\[REDACTED:[0-9a-f]{8}\]$/);
   });
 
+  it('masks when action=mask, revealing the last 4 chars', () => {
+    const r = createRedactor({
+      rules: [{ name: 'env', source: 'process.env', action: 'mask' }],
+    });
+    const out = r.scanString(FAKE_STRIPE);
+    const last4 = FAKE_STRIPE.slice(-4);
+    expect(out).toBe('•'.repeat(FAKE_STRIPE.length - 4) + last4);
+  });
+
+  it('honors mask config (reveal + char)', () => {
+    const r = createRedactor({
+      rules: [{ name: 'env', source: 'process.env', action: 'mask' }],
+      mask: { reveal: 2, char: '*' },
+    });
+    const out = r.scanString(FAKE_STRIPE);
+    expect(out).toBe('*'.repeat(FAKE_STRIPE.length - 2) + FAKE_STRIPE.slice(-2));
+  });
+
   it('redacts in nested objects', () => {
     const r = createRedactor({
       rules: [{ name: 'env', source: 'process.env' }],

@@ -1,38 +1,62 @@
 {
   "name": "@redactenv/next",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Next.js adapter for redactenv: instrumentation hook + Response wrapper + error scrubbing",
   "type": "module",
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./middleware": {
-      "types": "./dist/middleware.d.ts",
-      "import": "./dist/middleware.js"
+      "import": {
+        "types": "./dist/middleware.d.ts",
+        "default": "./dist/middleware.js"
+      },
+      "require": {
+        "types": "./dist/middleware.d.cts",
+        "default": "./dist/middleware.cjs"
+      }
     },
     "./auto": {
-      "types": "./dist/auto.d.ts",
-      "import": "./dist/auto.js"
+      "import": {
+        "types": "./dist/auto.d.ts",
+        "default": "./dist/auto.js"
+      },
+      "require": {
+        "types": "./dist/auto.d.cts",
+        "default": "./dist/auto.cjs"
+      }
     }
   },
-  "files": ["dist", "src"],
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "test": "vitest run"
+    "build": "tsup",
+    "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
-    "@redactenv/core": "0.1.0",
-    "@redactenv/patterns": "0.1.0"
+    "@redactenv/core": "0.2.0",
+    "@redactenv/patterns": "0.2.0"
   },
   "peerDependencies": {
     "next": ">=13"
   },
   "peerDependenciesMeta": {
-    "next": { "optional": true }
+    "next": {
+      "optional": true
+    }
   },
   "license": "MIT",
   "repository": {

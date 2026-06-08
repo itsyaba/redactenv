@@ -1,4 +1,4 @@
-export type Action = 'redact' | 'hash';
+export type Action = 'redact' | 'hash' | 'mask';
 
 export type Confidence = 'high' | 'medium';
 
@@ -30,11 +30,21 @@ export interface HashConfig {
   suffix?: string;
 }
 
+export interface MaskConfig {
+  /** How many characters to leave visible. Default 4. */
+  reveal?: number;
+  /** Which end to reveal. Default 'end' (show the last N chars). */
+  from?: 'start' | 'end';
+  /** Character used for the masked portion. Default '•'. */
+  char?: string;
+}
+
 export interface RedactorConfig {
   rules: Rule[];
   defaultAction?: Action;
   allowEnvKeys?: string[];
   hash?: HashConfig;
+  mask?: MaskConfig;
   placeholder?: string;
   minSecretLength?: number;
 }

@@ -1,31 +1,53 @@
 {
   "name": "@redactenv/logger",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Logger adapters: pino transport + console patcher that redact secrets",
   "type": "module",
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./console": {
-      "types": "./dist/console.d.ts",
-      "import": "./dist/console.js"
+      "import": {
+        "types": "./dist/console.d.ts",
+        "default": "./dist/console.js"
+      },
+      "require": {
+        "types": "./dist/console.d.cts",
+        "default": "./dist/console.cjs"
+      }
     },
     "./pino": {
-      "types": "./dist/pino.d.ts",
-      "import": "./dist/pino.js"
+      "import": {
+        "types": "./dist/pino.d.ts",
+        "default": "./dist/pino.js"
+      },
+      "require": {
+        "types": "./dist/pino.d.cts",
+        "default": "./dist/pino.cjs"
+      }
     }
   },
-  "files": ["dist", "src"],
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "test": "vitest run"
+    "build": "tsup",
+    "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
-    "@redactenv/core": "0.1.0"
+    "@redactenv/core": "0.2.0"
   },
   "license": "MIT",
   "repository": {

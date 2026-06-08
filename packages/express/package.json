@@ -1,34 +1,52 @@
 {
   "name": "@redactenv/express",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Express/Connect middleware that redacts secrets from outgoing responses",
   "type": "module",
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./auto": {
-      "types": "./dist/auto.d.ts",
-      "import": "./dist/auto.js"
+      "import": {
+        "types": "./dist/auto.d.ts",
+        "default": "./dist/auto.js"
+      },
+      "require": {
+        "types": "./dist/auto.d.cts",
+        "default": "./dist/auto.cjs"
+      }
     }
   },
-  "files": ["dist", "src"],
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "test": "vitest run"
+    "build": "tsup",
+    "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
-    "@redactenv/core": "0.1.0",
-    "@redactenv/patterns": "0.1.0"
+    "@redactenv/core": "0.2.0",
+    "@redactenv/patterns": "0.2.0"
   },
   "peerDependencies": {
     "express": ">=4"
   },
   "peerDependenciesMeta": {
-    "express": { "optional": true }
+    "express": {
+      "optional": true
+    }
   },
   "license": "MIT",
   "repository": {

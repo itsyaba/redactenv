@@ -1,0 +1,36 @@
+name: Release
+
+# Publishes all @redactenv/* packages to npm with provenance when a
+# v* tag is pushed (e.g. `git tag v0.2.0 && git push origin v0.2.0`).
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # required for npm provenance (OIDC)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      # Publish in dependency order. Internal deps are pinned exact, so a
+      # dependency must reach the registry before its consumers.
+      - name: Publish packages
+        run: |
+          for p in core patterns logger express next; do
+            echo "::group::publish @redactenv/$p"
+            npm publish -w @redactenv/$p --provenance --access public
+            echo "::endgroup::"
+          done
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
